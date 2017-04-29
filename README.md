@@ -1,5 +1,5 @@
 WP-Admin Test User Credentials
 ==============================
 
-u: admin
+u: admin  
 p: admin

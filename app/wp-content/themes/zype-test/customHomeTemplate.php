@@ -53,16 +53,16 @@ get_header(); ?>
                                   <div class='col-lg-12 col-sm-12 col-md-12'>
                                  <?php
                                   while ( $customers->have_posts() ) : $customers->the_post();
-                                          
+                                          $id = get_the_ID();
                                           ?>
                                                 <div class='col-lg-6 col-sm-6 col-md-6'>
-                                                     <?php  $img= CFS()->get( 'customer_logo',get_the_ID() );  ?> 
+                                                     <?php  $img= CFS()->get( 'customer_logo', $id );  ?> 
                                                     <img src="<?php echo $img ?>" >                                                    
                                                     <h4> <?php echo get_the_title();?> </h4>
-                                                    <p> <?php echo  CFS()->get( 'customer_description',get_the_ID() );?> </p>
+                                                    <p> <?php echo  CFS()->get( 'customer_description', $id );?> </p>
                                                      <?php 
                                                      
-                                                    $loop = CFS()->get( 'customer_urls',get_the_ID() );
+                                                    $loop = CFS()->get( 'customer_urls', $id );
                                                         foreach ( $loop as $row ) {
                                                            //$row['url_name'];
                                                            echo "<p>".$row['url']."</p>";
@@ -70,7 +70,7 @@ get_header(); ?>
                                                             }
                                                     
                                                      ?>
-                                                      <p><?php $term_list=  wp_get_post_terms( get_the_ID(), 'sagments' );
+                                                      <p><?php $term_list=  wp_get_post_terms( $id, 'sagments' );
                                                              foreach($term_list as $term_single) {
                                                                 echo $term_single->name.", "; //do something here
                                                                 }?>                                        

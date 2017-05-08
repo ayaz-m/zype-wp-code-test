@@ -105,7 +105,9 @@ add_action( 'widgets_init', 'zype_test_widgets_init' );
  * Enqueue scripts and styles.
  */
 function zype_test_scripts() {
-	wp_enqueue_style( 'zype-test-style', get_stylesheet_uri() );
+        wp_enqueue_style( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', array(), '3.3.7' );
+    
+	wp_enqueue_style( 'zype-test-style', get_stylesheet_uri(), array('bootstrap') );
 
 	wp_enqueue_script( 'zype-test-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 
@@ -116,6 +118,71 @@ function zype_test_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'zype_test_scripts' );
+
+// Creates Customer Custom Post Type
+add_action( 'init', 'zype_customer_init' );
+function zype_customer_init() {
+    $args = array(
+        'label' => __('Customers'),
+        'public' => true,
+        'show_ui' => true,
+        'capability_type' => 'post',
+        'rewrite' => array('slug' => 'customers'),
+        'query_var' => true,
+        'menu_icon' => 'dashicons-businessman',    
+    );
+    $supports = array(
+        'title', // post title
+        'editor', // post content
+        'thumbnail', // featured images
+    );
+    $labels = array(
+        'name' => _x('Customers', 'plural'),
+        'singular_name' => _x('Customer', 'singular'),
+        'menu_name' => _x('Customers', 'admin menu'),
+        'name_admin_bar' => _x('Customers', 'admin bar'),
+        'add_new' => _x('Add New', 'add new'),
+        'add_new_item' => __('Add New Customer'),
+        'new_item' => __('New Customer'),
+        'edit_item' => __('Edit Customer'),
+        'view_item' => __('View Customer'),
+        'all_items' => __('All Customers'),
+        'search_items' => __('Search Customers'),
+        'not_found' => __('No Customers found.'),
+    );
+    $args = array(
+        'supports'  => $supports,
+        'labels'    => $labels,
+        'public'    => true,
+        'query_var' => true,
+        'rewrite' => array('slug' => 'customer'),
+        'has_archive' => true,
+    );
+    
+    register_post_type( 'customers', $args ); 
+    
+    $labels = array(
+        'name'              => _x( 'Sagments', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Sagment', 'taxonomy singular name' ),
+        'search_items'      =>  __( 'Search Sagments' ),
+        'all_items'         => __( 'All Sagments' ),
+        'parent_item'       => __( 'Parent Sagment' ),
+        'parent_item_colon' => __( 'Parent Sagment:' ),
+        'edit_item'         => __( 'Edit Sagment' ), 
+        'update_item'       => __( 'Update Sagment' ),
+        'add_new_item'      => __( 'Add New Sagment' ),
+        'new_item_name'     => __( 'New Sagment Name' ),
+        'menu_name'         => __( 'Sagments' ),
+    ); 	
+ 
+    register_taxonomy('sagments', 'customers', array(
+        'hierarchical'        => true,
+        'labels'              => $labels,
+        'show_ui'             => true,
+        'show_admin_column'   => true,
+        'query_var'           => true
+    ));
+}
 
 /**
  * Implement the Custom Header feature.

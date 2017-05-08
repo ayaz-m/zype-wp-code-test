@@ -123,13 +123,13 @@ add_action( 'wp_enqueue_scripts', 'zype_test_scripts' );
 add_action( 'init', 'zype_customer_init' );
 function zype_customer_init() {
     $args = array(
-        'label' => __('Customers'),
-        'public' => true,
-        'show_ui' => true,
-        'capability_type' => 'post',
-        'rewrite' => array('slug' => 'customers'),
-        'query_var' => true,
-        'menu_icon' => 'dashicons-businessman',    
+        'label'             => __('Customers'),
+        'public'            => true,
+        'show_ui'           => true,
+        'capability_type'   => 'post',
+        'rewrite'           => array('slug' => 'customers'),
+        'query_var'         => true,
+        'menu_icon'         => 'dashicons-businessman',    
     );
     $supports = array(
         'title', // post title
@@ -137,26 +137,26 @@ function zype_customer_init() {
         'thumbnail', // featured images
     );
     $labels = array(
-        'name' => _x('Customers', 'plural'),
-        'singular_name' => _x('Customer', 'singular'),
-        'menu_name' => _x('Customers', 'admin menu'),
-        'name_admin_bar' => _x('Customers', 'admin bar'),
-        'add_new' => _x('Add New', 'add new'),
-        'add_new_item' => __('Add New Customer'),
-        'new_item' => __('New Customer'),
-        'edit_item' => __('Edit Customer'),
-        'view_item' => __('View Customer'),
-        'all_items' => __('All Customers'),
-        'search_items' => __('Search Customers'),
-        'not_found' => __('No Customers found.'),
+        'name'              => _x('Customers', 'plural'),
+        'singular_name'     => _x('Customer', 'singular'),
+        'menu_name'         => _x('Customers', 'admin menu'),
+        'name_admin_bar'    => _x('Customers', 'admin bar'),
+        'add_new'           => _x('Add New', 'add new'),
+        'add_new_item'      => __('Add New Customer'),
+        'new_item'          => __('New Customer'),
+        'edit_item'         => __('Edit Customer'),
+        'view_item'         => __('View Customer'),
+        'all_items'         => __('All Customers'),
+        'search_items'      => __('Search Customers'),
+        'not_found'         => __('No Customers found.'),
     );
     $args = array(
-        'supports'  => $supports,
-        'labels'    => $labels,
-        'public'    => true,
-        'query_var' => true,
-        'rewrite' => array('slug' => 'customer'),
-        'has_archive' => true,
+        'supports'      => $supports,
+        'labels'        => $labels,
+        'public'        => true,
+        'query_var'     => true,
+        'rewrite'       => array('slug' => 'customer'),
+        'has_archive'   => true,
     );
     
     register_post_type( 'customers', $args ); 
